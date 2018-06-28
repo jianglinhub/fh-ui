@@ -1,19 +1,13 @@
 # fh-ui
 
-> A Vue.js project
+> Vue + ElementUi后台管理系统通用组件
 
-## Build Setup
+## 持续优化中...
 
-``` bash
-# install dependencies
-npm install
+## version 1.0.1 
+* 1. 优化组件目录结构
+* 2. 分离测试代码与组件代码
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+## version 1.0.0 
+* 1. 初始化组件库
+* 2. 加入 base-search 组件

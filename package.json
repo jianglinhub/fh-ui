@@ -1,7 +1,7 @@
 {
   "name": "fh-ui",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "version": "1.0.1",
+  "description": "Vue + ElementUi后台管理系统通用组件",
   "author": "",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -30,7 +30,6 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.11",
-    "element-theme-chalk": "^2.4.2",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-friendly-formatter": "^3.0.0",
