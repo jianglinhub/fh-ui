@@ -33,12 +33,15 @@
     <el-button type="primary" size="small" style="width:100px;">查询</el-button>
     <el-button type="primary" size="small" style="width:100px;">重置</el-button>
     <div class="condition-action">
-      <span @click="isShowSearchModal = true">保存查询条件</span>
+      <span @click="isShowSearchModal = true">保存查询条</span>
       <span>重置</span>
     </div>
-    <div class="more-condition" v-show="isShowMoreCondition">
-      <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
-    </div>
+    <transition name="fade">
+        <div class="more-condition" v-show="isShowMoreCondition">
+        <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
+      </div>
+    </transition>
+
     <el-dialog
       title="筛选方案"
       :visible.sync="isShowSearchModal"
@@ -238,6 +241,14 @@ export default {
 
 <style lang="less" scoped>
   #base-search {
+    /*css过渡样式 start*/
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+    /*css过渡样式 end*/
     position: relative;
     .text {
       padding: 10px 0 10px 0;
