@@ -4,11 +4,10 @@ import Vue from 'vue';
 import Element from 'element-ui';
 import App from './App';
 import router from './router';
-import FHUi from './index';
 import './components';
+import '../dist/static/style.min.css';
 
 Vue.use(Element);
-Vue.use(FHUi);
 
 Vue.config.productionTip = false;
 

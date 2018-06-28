@@ -5,11 +5,13 @@
 </template>
 
 <script>
-import { BaseSearach } from 'FHUi';
+import FHUi from 'FHUi';
+
+const { BaseSearch } = FHUi;
 
 export default {
   components: {
-    BaseSearach,
+    BaseSearch,
   },
 };
 </script>

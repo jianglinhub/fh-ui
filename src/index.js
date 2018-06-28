@@ -20,6 +20,6 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-const Obj = Object.assign(FHUi, { install });
+const Obj = { ...FHUi, install };
 
 export default Obj;
