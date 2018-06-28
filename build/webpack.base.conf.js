@@ -33,7 +33,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'FHUi': resolve('dist/FHUi.min.js')
+      'FHUi': resolve('lib/FHUi.min.js')
     }
   },
   module: {

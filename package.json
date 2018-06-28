@@ -15,7 +15,7 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
-  "main": "dist/FHUi.min.js",
+  "main": "lib/FHUi.min.js",
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",

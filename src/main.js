@@ -5,7 +5,7 @@ import Element from 'element-ui';
 import App from './App';
 import router from './router';
 import './components';
-import '../dist/static/style.min.css';
+import '../lib/static/style.min.css';
 
 Vue.use(Element);
 
