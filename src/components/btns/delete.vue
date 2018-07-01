@@ -1,5 +1,5 @@
 <template>
-  <el-button type="primary" icon="el-icon-delete" @click="action">删除</el-button>
+  <el-button type="primary" icon="el-icon-delete" @click="handleDel">删除</el-button>
 </template>
 
 <script>
@@ -10,14 +10,19 @@ export default {
       type: Object,
       default() {
         return {
-          id: 0,
+          id: '0',
         };
       },
       required: true,
     },
   },
   methods: {
-    action() {
+    handleDel() {
+      const params = {
+        id: this.options.id,
+        actionName: '删除',
+      };
+      this.$emit('deleteAction', params);
     },
   },
 };
