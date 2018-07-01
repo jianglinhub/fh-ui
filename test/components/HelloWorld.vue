@@ -14,10 +14,6 @@
 </template>
 
 <script>
-import FHUi from 'FHUi';
-
-const { BtnLeftGroup, BtnRightGroup } = FHUi;
-
 export default {
   data() {
     return {
@@ -51,10 +47,6 @@ export default {
     handleDelConfirm() {
       console.log('do something after handleDelConfirm!'); // eslint-disable-line
     },
-  },
-  components: {
-    BtnLeftGroup,
-    BtnRightGroup,
   },
 };
 </script>
