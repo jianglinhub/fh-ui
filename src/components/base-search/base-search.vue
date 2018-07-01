@@ -38,7 +38,148 @@
     </div>
     <transition name="fade">
         <div class="more-condition" v-show="isShowMoreCondition">
-        <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
+          <ul class="rule-items">
+            <li v-show="show0">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-show="show1">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-show="show2">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-show="show3">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-show="show4">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-if="show5">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-if="show6">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-if="show7">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-if="show8">
+              <transition name="slide-fade">
+                <div v-show="show">
+                  <search-sub
+                    @getDelBoolean="getDelVal"
+                    :and="and"
+                    :field="field"
+                    :condition="condition"
+                    :fields="fields"
+                    :conditions="conditions">
+                  </search-sub>
+                </div>
+              </transition>
+            </li>
+            <li v-if="show9"><transition name="slide-fade">
+              <div v-show="show">
+                <search-sub
+                  @getDelBoolean="getDelVal"
+                  :and="and"
+                  :field="field"
+                  :condition="condition"
+                  :fields="fields"
+                  :conditions="conditions">
+                </search-sub>
+              </div>
+            </transition>
+            </li>
+          </ul>
+          <el-button @click="addRule()" type="primary" size="small" icon="el-icon-plus"></el-button>
       </div>
     </transition>
 
@@ -161,7 +302,20 @@
 </template>
 
 <script>
+import SearchSub from './search-sub';
+
 export default {
+  components: {
+    SearchSub,
+  },
+  props: {
+    fields: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   data() {
     return {
       conditions: [{
@@ -216,12 +370,45 @@ export default {
       isShowSearchModal: false,
       activeName2: 'first',
       tableConditionData: [],
-      handledConditions: {}, // 组装好的查询条件
+      show: true,
+      show0: true,
+      show1: false,
+      show2: false,
+      show3: false,
+      show4: false,
+      show5: false,
+      show6: false,
+      show7: false,
+      show8: false,
+      show9: false,
+      // searchConditions: [{
+      //   seqNo: 1,
+      //   fieldCode: 'busCode',
+      //   fileType: 'eq',
+      //   defValue: '_query_template_templateList',
+      //   logic: 'AND',
+      // }],
+      searchConditions: [],
     };
   },
   methods: {
+    search() {
+      this.$emit('onSearch', this.searchConditions);
+    },
+    getDelVal(d) {
+      this.show0 = d;
+      this.show = this.show0;
+    },
     showMoreCondition() {
       this.isShowMoreCondition = !this.isShowMoreCondition;
+    },
+    /**
+     * 添加查询规则
+     */
+    addRule() {
+      for (let i = 0; i < 10; i += 1) {
+        this[`show${i}`] = true;
+      }
     },
   },
 };
@@ -229,6 +416,29 @@ export default {
 
 <style lang="less" scoped>
   #base-search {
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active {
+      transition: all .5s ease;
+    }
+    .slide-fade-leave-active {
+      transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    /*公共样式 start*/
+    ul {
+      margin-top: 0;
+      padding-left: 0;
+      li {
+        margin-bottom: 10px;
+        list-style-type: none;
+      }
+    }
+    /*公共样式 end*/
     /*css过渡样式 start*/
     .fade-enter-active, .fade-leave-active {
       transition: opacity .5s;
@@ -277,7 +487,7 @@ export default {
       position: absolute;
       top: 80px;
       left: 0;
-      width: 470px;
+      min-width: 470px;
       padding: 10px;
       border: 1px solid #dcdfe6;
       border-radius: 4px;
