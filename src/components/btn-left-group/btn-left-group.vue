@@ -4,7 +4,11 @@
       <add v-if="btns.includes('add')" :options="options.addOptions"></add>
       <update v-if="btns.includes('update')" :options="options.updateOptions"></update>
       <save v-if="btns.includes('save')" :options="options.saveOptions"></save>
-      <delete v-if="btns.includes('del')" :options="options.delOptions"></delete>
+      <delete
+        v-if="btns.includes('del')"
+        :options="options.delOptions"
+        @deleteAction="doHandle"
+      ></delete>
       <audit v-if="btns.includes('audit')" :options="options.auditOptions"></audit>
       <check v-if="btns.includes('check')" :options="options.checkOptions"></check>
       <start-use v-if="btns.includes('startUse')" :options="options.startUseOptions"></start-use>
@@ -17,6 +21,17 @@
         :options="options.confirmSelectOptions">
       </confirm-select>
     </el-button-group>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      :before-close="handleClose"
+      width="30%">
+      <span>确定要{{actionName}}【id={{id}}】的项吗？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleClose">取 消</el-button>
+        <el-button type="primary" @click="handleConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -34,6 +49,13 @@ import Import from '../btns/import';
 import ConfirmSelect from '../btns/confirm-select';
 
 export default {
+  data() {
+    return {
+      id: '-1',
+      actionName: '删除',
+      dialogVisible: false,
+    };
+  },
   props: {
     btns: {
       type: Array,
@@ -58,6 +80,25 @@ export default {
         };
       },
       required: true,
+    },
+  },
+  methods: {
+    doHandle(data) {
+      this.dialogVisible = true;
+      this.id = data.id;
+      this.actionName = data.actionName;
+    },
+    handleClose() {
+      this.dialogVisible = false;
+      if (this.actionName === '删除') {
+        this.$emit('handleDelClose');
+      }
+    },
+    handleConfirm() {
+      this.dialogVisible = false;
+      if (this.actionName === '删除') {
+        this.$emit('handleDelConfirm');
+      }
     },
   },
   components: {

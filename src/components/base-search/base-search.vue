@@ -30,11 +30,11 @@
       </el-option>
     </el-select>
     <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
-    <el-button type="primary" size="small" style="width:100px;">查询</el-button>
+    <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
     <el-button type="primary" size="small" style="width:100px;">重置</el-button>
     <div class="condition-action">
-      <span @click="isShowSearchModal = true">保存查询条件</span>
-      <span>重置</span>
+      <!--<span @click="isShowSearchModal = true">保存查询条件</span>-->
+     <!--<span>重置</span>-->
     </div>
     <div class="more-condition" v-show="isShowMoreCondition">
       <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
@@ -161,55 +161,42 @@
 export default {
   data() {
     return {
-      fields: [{
-        value: '选项1',
-        label: '黄金糕',
-      }, {
-        value: '选项2',
-        label: '双皮奶',
-      }, {
-        value: '选项3',
-        label: '蚵仔煎',
-      }, {
-        value: '选项4',
-        label: '龙须面',
-      }, {
-        value: '选项5',
-        label: '北京烤鸭',
-      }],
       conditions: [{
-        value: '不等于',
+        value: 'neq',
         label: '不等于',
       }, {
-        value: '等于',
+        value: 'eq',
         label: '等于',
       }, {
-        value: '大于',
+        value: 'gt',
         label: '大于',
       }, {
-        value: '小于',
+        value: 'lt',
         label: '小于',
       }, {
-        value: '大于等于',
+        value: 'gte',
         label: '大于等于',
       }, {
-        value: '小于等于',
+        value: 'lte',
         label: '小于等于',
       }, {
-        value: '左包含',
+        value: 'leftContain',
         label: '左包含',
       }, {
-        value: '右包含',
+        value: 'rightContain',
         label: '右包含',
       }, {
         value: 'in',
         label: 'in',
       }, {
-        value: '包含',
+        value: 'contain',
         label: '包含',
       }, {
-        value: '不为空',
+        value: 'isNotNull',
         label: '不为空',
+      }, {
+        value: 'isNull',
+        label: '为空',
       }],
       ands: [{
         value: '并且',
@@ -219,16 +206,30 @@ export default {
         label: '或者',
       }],
       field: '',
-      condition: '包含',
+      condition: 'contain',
       value: '',
       and: '并且',
       isShowMoreCondition: false,
       isShowSearchModal: false,
       activeName2: 'first',
       tableConditionData: [],
+      handledConditions: {}, // 组装好的查询条件
     };
   },
+  props: {
+    fields: {
+      type: Array,
+      default: () => [],
+      required: true,
+    },
+  },
   methods: {
+    handleConditions() { // 组装系统
+
+    },
+    search() {
+      this.$emit('onSearch', this.handledConditions);
+    },
     showMoreCondition() {
       this.isShowMoreCondition = !this.isShowMoreCondition;
     },
