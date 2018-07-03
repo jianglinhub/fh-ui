@@ -8,12 +8,11 @@
     -->
     <div class="search">
       <search-sub
-        @getDelBoolean="getDelVal"
-        :and="and"
-        :field="field"
-        :condition="condition"
         :fields="fields"
-        :conditions="conditions">
+        v-for="(item, index) in (moreConditions.slice(0, 1))"
+        :key="index"
+        :seq="index"
+        :options="item">
       </search-sub>
       <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
       <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
@@ -26,20 +25,28 @@
     <transition name="fade">
       <div class="more-condition" v-show="isShowMoreCondition">
         <transition-group tag="ul" name="fade" class="rule-items">
-          <li key="1">
-            <div>
-              <search-sub
-                @getDelBoolean="getDelVal"
-                :and="and"
-                :field="field"
-                :condition="condition"
-                :fields="fields"
-                :conditions="conditions">
-              </search-sub>
-            </div>
+          <li v-for="(item, index) in (moreConditions.slice(1))" :key="index">
+            <search-sub
+              :fields="fields"
+              :seq="index"
+              :options="item">
+            </search-sub>
+            <el-button
+              type="primary"
+              size="small"
+              icon="el-icon-minus"
+              class="minus-btn"
+              @click="delOne(item.seqNo)">
+            </el-button>
           </li>
         </transition-group>
-        <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
+        <el-button
+          type="primary"
+          size="small"
+          icon="el-icon-plus"
+          @click="addOne"
+          v-show="moreConditions.length < 10">
+        </el-button>
       </div>
     </transition>
 
@@ -162,95 +169,69 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import SearchSub from './search-sub';
 
 export default {
-  components: {
-    SearchSub,
-  },
-  props: {
-    fields: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
-  },
   data() {
     return {
-      conditions: [{
-        value: 'neq',
-        label: '不等于',
-      }, {
-        value: 'eq',
-        label: '等于',
-      }, {
-        value: 'gt',
-        label: '大于',
-      }, {
-        value: 'lt',
-        label: '小于',
-      }, {
-        value: 'gte',
-        label: '大于等于',
-      }, {
-        value: 'lte',
-        label: '小于等于',
-      }, {
-        value: 'leftContain',
-        label: '左包含',
-      }, {
-        value: 'rightContain',
-        label: '右包含',
-      }, {
-        value: 'in',
-        label: 'in',
-      }, {
-        value: 'contain',
-        label: '包含',
-      }, {
-        value: 'isNotNull',
-        label: '不为空',
-      }, {
-        value: 'isNull',
-        label: '为空',
+      moreConditions: [{
+        seqNo: 1,
+        field: '',
+        condition: 'contain',
+        value: '',
+        and: 'AND',
       }],
-      ands: [{
-        value: '并且',
-        label: '并且',
-      }, {
-        value: '或者',
-        label: '或者',
-      }],
-      field: '',
-      condition: 'contain',
       value: '',
-      and: '并且',
       isShowMoreCondition: false,
       isShowSearchModal: false,
       activeName2: 'first',
       tableConditionData: [],
-      // searchConditions: [{
-      //   seqNo: 1,
-      //   fieldCode: 'busCode',
-      //   fileType: 'eq',
-      //   defValue: '_query_template_templateList',
-      //   logic: 'AND',
-      // }],
-      searchConditions: [],
+      tmpCondition: {
+        seqNo: 1,
+        field: '',
+        condition: 'contain',
+        value: '',
+        and: 'AND',
+      },
     };
+  },
+  props: {
+    fields: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  watch: {
+    moreConditions(val) {
+      if (val.length === 10) {
+        this.$message({
+          message: '目前仅支持10条（包含）以内的查询条件',
+          type: 'warning',
+        });
+      }
+    },
   },
   methods: {
     search() {
-      this.$emit('onSearch', this.searchConditions);
+      this.$emit('onSearch', this.moreConditions);
     },
-    getDelVal(d) {
-      this.show0 = d;
-      this.show = this.show0;
+    delOne(seqNo) {
+      const arr = JSON.parse(JSON.stringify(this.moreConditions));
+      const arr1 = _.filter(arr, (n) => n.seqNo !== seqNo);
+      this.moreConditions = arr1;
+    },
+    addOne() {
+      const condition = JSON.parse(JSON.stringify(this.tmpCondition));
+      condition.seqNo = this.moreConditions.length + 1;
+      this.moreConditions.push(condition);
     },
     showMoreCondition() {
       this.isShowMoreCondition = !this.isShowMoreCondition;
     },
+  },
+  components: {
+    SearchSub,
   },
 };
 </script>
@@ -268,8 +249,6 @@ export default {
       transform: translateY(-10px);
       opacity: 0;
     }
-
-    /*公共样式 start*/
     ul {
       margin-top: 0;
       padding-left: 0;
@@ -322,6 +301,15 @@ export default {
     }
     .more-condition {
       margin-top: 10px;
+      .rule-items {
+        li {
+          display: flex;
+          flex-direction: row;
+          .minus-btn {
+            margin-left: 10px;
+          }
+        }
+      }
     }
     .wrapper {
       display: flex;

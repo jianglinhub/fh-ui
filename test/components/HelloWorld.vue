@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-search :fields="fields"></base-search>
+    <base-search :fields="fields" @onSearch="onSearch"></base-search>
     <!--<BtnLeftGroup-->
       <!--:btns="leftBtns"-->
       <!--:options="leftOptions"-->
@@ -18,7 +18,22 @@
 export default {
   data() {
     return {
-      fields: [],
+      fields: [{
+        value: '黄金糕',
+        label: '黄金糕',
+      }, {
+        value: '双皮奶',
+        label: '双皮奶',
+      }, {
+        value: '蚵仔煎',
+        label: '蚵仔煎',
+      }, {
+        value: '龙须面',
+        label: '龙须面',
+      }, {
+        value: '北京烤鸭',
+        label: '北京烤鸭',
+      }],
     };
   },
   // data() {
@@ -47,6 +62,9 @@ export default {
   //   };
   // },
   methods: {
+    onSearch(data) {
+      console.log('data: ', data); // eslint-disable-line
+    },
     handleDelClose() {
       console.log('do something after handleDelClose!'); // eslint-disable-line
     },
