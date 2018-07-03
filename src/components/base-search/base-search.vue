@@ -1,3 +1,4 @@
+
 <template>
   <div id="base-search">
     <!--
@@ -11,33 +12,35 @@
         :fields="fields"
         v-for="(item, index) in (moreConditions.slice(0, 1))"
         :key="index"
-        :seq="index"
         :options="item">
       </search-sub>
       <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
       <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
       <el-button type="primary" size="small" style="width:100px;">重置</el-button>
+      <!--
       <div class="condition-action">
         <span @click="isShowSearchModal = true">保存查询条件</span>
         <span>重置</span>
       </div>
+      -->
     </div>
     <transition name="fade">
       <div class="more-condition" v-show="isShowMoreCondition">
         <transition-group tag="ul" name="fade" class="rule-items">
-          <li v-for="(item, index) in (moreConditions.slice(1))" :key="index">
+          <li v-for="(item, index) in (moreConditions.slice(1))" :key="index + 1">
             <search-sub
               :fields="fields"
-              :seq="index"
               :options="item">
             </search-sub>
+            <!--
             <el-button
               type="primary"
               size="small"
               icon="el-icon-minus"
               class="minus-btn"
-              @click="delOne(item.seqNo)">
+              @click="delOne(index + 1)">
             </el-button>
+            -->
           </li>
         </transition-group>
         <el-button
@@ -169,7 +172,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import SearchSub from './search-sub';
 
 export default {
@@ -216,11 +218,14 @@ export default {
     search() {
       this.$emit('onSearch', this.moreConditions);
     },
-    delOne(seqNo) {
-      const arr = JSON.parse(JSON.stringify(this.moreConditions));
-      const arr1 = _.filter(arr, (n) => n.seqNo !== seqNo);
-      this.moreConditions = arr1;
-    },
+    // delOne(index) {
+    //   const leftArr = this.moreConditions.slice(0, index + 1);
+    //   const rightArr = this.moreConditions.slice(index + 1);
+    //   leftArr.pop();
+    //   this.$nextTick(() => {
+    //     this.moreConditions = leftArr.concat(rightArr);
+    //   });
+    // },
     addOne() {
       const condition = JSON.parse(JSON.stringify(this.tmpCondition));
       condition.seqNo = this.moreConditions.length + 1;
