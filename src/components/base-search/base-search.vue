@@ -1,185 +1,45 @@
 <template>
   <div id="base-search">
+    <!--
     <div class="text">
       <span>筛选方案</span>
       <span class="selected">默认筛选</span>
     </div>
-    <el-select v-model="field" placeholder="列表字段" size="small" style="width:160px">
-      <el-option
-        v-for="item in fields"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
-    <el-select v-model="condition" placeholder="包含" size="small" style="width:80px">
-      <el-option
-        v-for="item in conditions"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
-    <el-input placeholder="请输入内容" v-model="value" size="small" style="width:160px"></el-input>
-    <el-select v-model="and" placeholder="并且" size="small" style="width:80px">
-      <el-option
-        v-for="item in ands"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
-    <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
-    <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
-    <el-button type="primary" size="small" style="width:100px;">重置</el-button>
-    <div class="condition-action">
-      <!--<span @click="isShowSearchModal = true">保存查询条件</span>-->
-     <!--<span>重置</span>-->
+    -->
+    <div class="search">
+      <search-sub
+        @getDelBoolean="getDelVal"
+        :and="and"
+        :field="field"
+        :condition="condition"
+        :fields="fields"
+        :conditions="conditions">
+      </search-sub>
+      <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
+      <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
+      <el-button type="primary" size="small" style="width:100px;">重置</el-button>
+      <div class="condition-action">
+        <span @click="isShowSearchModal = true">保存查询条件</span>
+        <span>重置</span>
+      </div>
     </div>
     <transition name="fade">
-        <div class="more-condition" v-show="isShowMoreCondition">
-          <ul class="rule-items">
-            <li v-show="show0">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-show="show1">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-show="show2">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-show="show3">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-show="show4">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-if="show5">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-if="show6">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-if="show7">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-if="show8">
-              <transition name="slide-fade">
-                <div v-show="show">
-                  <search-sub
-                    @getDelBoolean="getDelVal"
-                    :and="and"
-                    :field="field"
-                    :condition="condition"
-                    :fields="fields"
-                    :conditions="conditions">
-                  </search-sub>
-                </div>
-              </transition>
-            </li>
-            <li v-if="show9"><transition name="slide-fade">
-              <div v-show="show">
-                <search-sub
-                  @getDelBoolean="getDelVal"
-                  :and="and"
-                  :field="field"
-                  :condition="condition"
-                  :fields="fields"
-                  :conditions="conditions">
-                </search-sub>
-              </div>
-            </transition>
-            </li>
-          </ul>
-          <el-button @click="addRule()" type="primary" size="small" icon="el-icon-plus"></el-button>
+      <div class="more-condition" v-show="isShowMoreCondition">
+        <transition-group tag="ul" name="fade" class="rule-items">
+          <li key="1">
+            <div>
+              <search-sub
+                @getDelBoolean="getDelVal"
+                :and="and"
+                :field="field"
+                :condition="condition"
+                :fields="fields"
+                :conditions="conditions">
+              </search-sub>
+            </div>
+          </li>
+        </transition-group>
+        <el-button type="primary" size="small" icon="el-icon-plus"></el-button>
       </div>
     </transition>
 
@@ -370,17 +230,6 @@ export default {
       isShowSearchModal: false,
       activeName2: 'first',
       tableConditionData: [],
-      show: true,
-      show0: true,
-      show1: false,
-      show2: false,
-      show3: false,
-      show4: false,
-      show5: false,
-      show6: false,
-      show7: false,
-      show8: false,
-      show9: false,
       // searchConditions: [{
       //   seqNo: 1,
       //   fieldCode: 'busCode',
@@ -402,33 +251,24 @@ export default {
     showMoreCondition() {
       this.isShowMoreCondition = !this.isShowMoreCondition;
     },
-    /**
-     * 添加查询规则
-     */
-    addRule() {
-      for (let i = 0; i < 10; i += 1) {
-        this[`show${i}`] = true;
-      }
-    },
   },
 };
 </script>
 
 <style lang="less" scoped>
   #base-search {
-    /* 可以设置不同的进入和离开动画 */
-    /* 设置持续时间和动画函数 */
-    .slide-fade-enter-active {
-      transition: all .5s ease;
+    border: 1px solid #dcdfe6;
+    padding: 10px;
+    border-radius: 6px;
+    display: inline-block;
+    .fade-enter-active, .fade-leave-active {
+      transition: all .3s ease;
     }
-    .slide-fade-leave-active {
-      transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-    .slide-fade-enter, .slide-fade-leave-to
-      /* .slide-fade-leave-active for below version 2.1.8 */ {
-      transform: translateX(-20px);
+    .fade-enter, .fade-leave-to {
+      transform: translateY(-10px);
       opacity: 0;
     }
+
     /*公共样式 start*/
     ul {
       margin-top: 0;
@@ -438,16 +278,6 @@ export default {
         list-style-type: none;
       }
     }
-    /*公共样式 end*/
-    /*css过渡样式 start*/
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 0;
-    }
-    /*css过渡样式 end*/
-    position: relative;
     .text {
       padding: 10px 0 10px 0;
       font-weight: 600;
@@ -461,36 +291,37 @@ export default {
         }
       }
     }
-    .add-btn {
-      vertical-align: middle;
-      font-size: 24px;
-      transition: all .2s;
-      transform: rotate(-90deg);
-      color: #409EFF;
-      cursor: pointer;
-    }
-    .condition-action {
-      height: 32px;
-      display: inline-block;
-      margin-left: 4px;
-      font-size: 12px;
-      color: #0b24fb;
-      font-weight: 600;
-      cursor: pointer;
-      span {
+    .search {
+      display: flex;
+      flex-direction: row;
+      .add-btn {
+        vertical-align: middle;
+        font-size: 24px;
+        margin-left: 10px;
+        transform: rotate(-90deg);
+        color: #409EFF;
+        cursor: pointer;
+      }
+      .condition-action {
+        width: 104px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 10px;
+        font-size: 12px;
+        color: #0b24fb;
+        font-weight: 600;
+        cursor: pointer;
+        span {
+          align-self: flex-end;
           &:hover {
-          color: #000;
+            color: #4c59c7;
+          }
         }
       }
     }
     .more-condition {
-      position: absolute;
-      top: 80px;
-      left: 0;
-      min-width: 470px;
-      padding: 10px;
-      border: 1px solid #dcdfe6;
-      border-radius: 4px;
+      margin-top: 10px;
     }
     .wrapper {
       display: flex;

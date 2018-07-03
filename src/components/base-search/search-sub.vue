@@ -8,7 +8,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-select v-model="condition" placeholder="包含" size="small" style="width:80px">
+      <el-select v-model="condition" placeholder="包含" size="small" style="width:100px">
         <el-option
           v-for="item in conditions"
           :key="item.value"
@@ -26,8 +26,6 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button @click="delItem()" type="primary" size="small" icon="el-icon-minus">
-      </el-button>
   </div>
 </template>
 <script>
@@ -69,17 +67,5 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      show: true,
-    };
-  },
-  methods: {
-    delItem() {
-      this.$emit('getDelBoolean', this.show = false);
-    },
-  },
 };
 </script>
-<style lang="less" scoped>
-</style>
