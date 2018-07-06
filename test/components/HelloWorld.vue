@@ -1,16 +1,16 @@
 <template>
   <div>
     <base-search :fields="fields" @onSearch="onSearch"></base-search>
-    <!--<BtnLeftGroup-->
-      <!--:btns="leftBtns"-->
-      <!--:options="leftOptions"-->
-      <!--@handleDelClose="handleDelClose"-->
-      <!--@handleDelConfirm="handleDelConfirm"-->
-    <!--&gt;</BtnLeftGroup>-->
-    <!--<BtnRightGroup-->
-      <!--:btns="rightBtns"-->
-      <!--:options="rightOptions"-->
-    <!--&gt;</BtnRightGroup>-->
+    <!--<btn-left-group
+      :btns="leftBtns"
+      :options="leftOptions"
+      @handleDelClose="handleDelClose"
+      @handleDelConfirm="handleDelConfirm">
+    </btn-left-group>
+    <btn-right-group
+      :btns="rightBtns"
+      :options="rightOptions">
+    </btn-right-group>-->
   </div>
 </template>
 
@@ -65,12 +65,12 @@ export default {
     onSearch(data) {
       console.log('data: ', data); // eslint-disable-line
     },
-    handleDelClose() {
-      console.log('do something after handleDelClose!'); // eslint-disable-line
-    },
-    handleDelConfirm() {
-      console.log('do something after handleDelConfirm!'); // eslint-disable-line
-    },
+    // handleDelClose() {
+    //   console.log('do something after handleDelClose!'); // eslint-disable-line
+    // },
+    // handleDelConfirm() {
+    //   console.log('do something after handleDelConfirm!'); // eslint-disable-line
+    // },
   },
 };
 </script>

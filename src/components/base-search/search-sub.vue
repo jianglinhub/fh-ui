@@ -91,7 +91,6 @@ export default {
       type: Object,
       default() {
         return {
-          seqNo: 1,
           field: '',
           condition: '',
           value: '',

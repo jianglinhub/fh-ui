@@ -10,13 +10,13 @@
     <div class="search">
       <search-sub
         :fields="fields"
-        v-for="(item, index) in (moreConditions.slice(0, 1))"
-        :key="index"
+        v-for="item in (moreConditions.slice(0, 1))"
+        :key="item.randomKey"
         :options="item">
       </search-sub>
       <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
       <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
-      <el-button type="primary" size="small" style="width:100px;">重置</el-button>
+      <el-button type="primary" size="small" style="width:100px;" @click="reset">重置</el-button>
       <!--
       <div class="condition-action">
         <span @click="isShowSearchModal = true">保存查询条件</span>
@@ -27,12 +27,11 @@
     <transition name="fade">
       <div class="more-condition" v-show="isShowMoreCondition">
         <transition-group tag="ul" name="fade" class="rule-items">
-          <li v-for="(item, index) in (moreConditions.slice(1))" :key="index + 1">
+          <li v-for="(item, index) in (moreConditions.slice(1))" :key="item.randomKey">
             <search-sub
               :fields="fields"
               :options="item">
             </search-sub>
-            <!--
             <el-button
               type="primary"
               size="small"
@@ -40,7 +39,6 @@
               class="minus-btn"
               @click="delOne(index + 1)">
             </el-button>
-            -->
           </li>
         </transition-group>
         <el-button
@@ -178,11 +176,11 @@ export default {
   data() {
     return {
       moreConditions: [{
-        seqNo: 1,
         field: '',
         condition: 'contain',
         value: '',
         and: 'AND',
+        randomKey: 'djdhn&d163',
       }],
       value: '',
       isShowMoreCondition: false,
@@ -190,7 +188,6 @@ export default {
       activeName2: 'first',
       tableConditionData: [],
       tmpCondition: {
-        seqNo: 1,
         field: '',
         condition: 'contain',
         value: '',
@@ -216,23 +213,41 @@ export default {
   },
   methods: {
     search() {
-      this.$emit('onSearch', this.moreConditions);
+      const arr = this.handleSeqNo();
+      this.$emit('onSearch', arr);
     },
-    // delOne(index) {
-    //   const leftArr = this.moreConditions.slice(0, index + 1);
-    //   const rightArr = this.moreConditions.slice(index + 1);
-    //   leftArr.pop();
-    //   this.$nextTick(() => {
-    //     this.moreConditions = leftArr.concat(rightArr);
-    //   });
-    // },
+    // 附加seqNo
+    handleSeqNo() {
+      const conditions = this.copyConditions();
+      for (let i = 0; i < conditions.length; i += 1) {
+        conditions[i].seqNo = i + 1;
+        delete conditions[i].randomKey;
+      }
+      return conditions;
+    },
+    delOne(index) {
+      const conditions = this.copyConditions();
+      conditions.splice(index, 1);
+      this.moreConditions = conditions;
+    },
     addOne() {
       const condition = JSON.parse(JSON.stringify(this.tmpCondition));
-      condition.seqNo = this.moreConditions.length + 1;
+      condition.randomKey = (Math.random() * 10000).toFixed(4);
       this.moreConditions.push(condition);
     },
     showMoreCondition() {
       this.isShowMoreCondition = !this.isShowMoreCondition;
+    },
+    copyConditions() {
+      return JSON.parse(JSON.stringify(this.moreConditions));
+    },
+    reset() {
+      this.moreConditions = [{
+        field: '',
+        condition: 'contain',
+        value: '',
+        and: 'AND',
+      }];
     },
   },
   components: {
