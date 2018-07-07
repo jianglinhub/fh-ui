@@ -1,5 +1,5 @@
 <template>
-  <el-button type="primary" icon="el-icon-remove-outline" @click="toPage">启用</el-button>
+  <el-button type="primary" icon="el-icon-remove-outline" @click="handleClick">启用</el-button>
 </template>
 
 <script>
@@ -13,12 +13,12 @@ export default {
     },
   },
   methods: {
-    toPage() {
-      this.$router.push({
-        name: this.options.router,
-        params: this.options.params,
-        query: this.options.query,
-      });
+    handleClick() {
+      const params = {
+        id: this.options.id,
+        actionName: '启用',
+      };
+      this.$emit('startUseAction', params);
     },
   },
 };

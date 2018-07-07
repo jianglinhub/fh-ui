@@ -11,7 +11,11 @@
       ></delete>
       <audit v-if="btns.includes('audit')" :options="options.auditOptions"></audit>
       <check v-if="btns.includes('check')" :options="options.checkOptions"></check>
-      <start-use v-if="btns.includes('startUse')" :options="options.startUseOptions"></start-use>
+      <start-use
+        v-if="btns.includes('startUse')"
+        :options="options.startUseOptions"
+        @startUseAction="doHandle">
+      </start-use>
       <submit v-if="btns.includes('submit')" :options="options.submitOptions"></submit>
       <import v-if="btns.includes('imp')" :options="options.importOptions"></import>
       <export v-if="btns.includes('exp')" :options="options.exportOptions"></export>
@@ -92,12 +96,16 @@ export default {
       this.dialogVisible = false;
       if (this.actionName === '删除') {
         this.$emit('handleDelClose');
+      } else if (this.actionName === '启用') {
+        this.$emit('handleStartUseClose');
       }
     },
     handleConfirm() {
       this.dialogVisible = false;
       if (this.actionName === '删除') {
         this.$emit('handleDelConfirm');
+      } else if (this.actionName === '启用') {
+        this.$emit('handleStartUseConfirm');
       }
     },
   },

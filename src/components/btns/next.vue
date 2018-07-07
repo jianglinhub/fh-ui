@@ -7,21 +7,5 @@
 <script>
 export default {
   name: 'next',
-  props: {
-    options: {
-      type: Object,
-      default() {},
-      required: true,
-    },
-  },
-  methods: {
-    toPage() {
-      this.$router.push({
-        name: this.options.router,
-        params: this.options.params,
-        query: this.options.query,
-      });
-    },
-  },
 };
 </script>
