@@ -1,3 +1,3 @@
-import BtnLeftGroup from './btn-left-group';
+import BtnLeftGroup from './btn-left-group'
 
-export default BtnLeftGroup;
+export default BtnLeftGroup

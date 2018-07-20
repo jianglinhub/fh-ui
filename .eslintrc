@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "plugins": [
+    "flowtype"
+  ],
+  "extends": [
+    "plugin:vue/recommended",
+    "plugin:flowtype/recommended"
+  ]
+}

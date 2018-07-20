@@ -1,24 +1,26 @@
-import './styles/index.less';
-import BaseSearch from './components/base-search';
-import BtnLeftGroup from './components/btn-left-group';
-import BtnRightGroup from './components/btn-right-group';
+/* @flow */
+
+import './styles/index.less'
+import BaseSearch from './components/base-search'
+import BtnLeftGroup from './components/btn-left-group'
+import BtnRightGroup from './components/btn-right-group'
 
 const FHUi = {
   BaseSearch,
   BtnLeftGroup,
-  BtnRightGroup,
-};
+  BtnRightGroup
+}
 
 const install = (Vue) => {
   Object.keys(FHUi).forEach((key) => {
-    Vue.component(key, FHUi[key]);
-  });
-};
-
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+    Vue.component(key, FHUi[key])
+  })
 }
 
-const Obj = { ...FHUi, install };
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
 
-export default Obj;
+const Obj = { ...FHUi, install }
+
+export default Obj
