@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import HelloWorld from '../components/HelloWorld';
-import TestAdd from '../components/testadd';
-import TestUpdate from '../components/testupdate';
+import Vue from 'vue'
+import Router from 'vue-router'
+import HelloWorld from '../components/HelloWorld'
+import TestAdd from '../components/testadd'
+import TestUpdate from '../components/testupdate'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -24,4 +24,4 @@ export default new Router({
       component: HelloWorld
     }
   ]
-});
+})
