@@ -14,8 +14,8 @@
     "commit-msg": "node scripts/verify-commit-msg.js"
   },
   "lint-staged": {
-    "./src/**/*.js": [
-      "node_modules/.bin/eslint --fix",
+    "src/**/*.js": [
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]
