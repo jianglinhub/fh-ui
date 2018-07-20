@@ -10,11 +10,11 @@
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
     "commit": "git-cz",
-    "pre-commit": "lint-staged",
+    "precommit": "lint-staged",
     "commit-msg": "node scripts/verify-commit-msg.js"
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "./src/**/*.js": [
       "eslint --fix",
       "prettier --write",
       "git add"
