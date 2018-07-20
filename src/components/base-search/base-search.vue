@@ -172,7 +172,7 @@
 import SearchSub from './search-sub';
 
 export default {
-  data(){
+  data() {
     return {
       moreConditions: [{
         field: '',

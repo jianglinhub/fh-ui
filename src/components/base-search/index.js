@@ -1,3 +1,3 @@
-import BaseSearch from './base-search'
+import BaseSearch from './base-search';
 
-export default BaseSearch
+export default BaseSearch;
