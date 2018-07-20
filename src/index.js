@@ -15,7 +15,6 @@ const install = (Vue) => {
   });
 };
 
-// auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
@@ -23,6 +22,3 @@ if (typeof window !== 'undefined' && window.Vue) {
 const Obj = { ...FHUi, install };
 
 export default Obj;
-
-console.log('ok')
-;
