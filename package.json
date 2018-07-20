@@ -10,9 +10,9 @@
     "lint": "eslint --fix src scripts",
     "flow": "flow check",
     "build": "node build/build.js",
-    "test": "npm run lint && flow check",
+    "test": "npm run lint",
     "commit": "git-cz",
-    "precommit": "npm run test && lint-staged",
+    "precommit": "lint-staged",
     "commitmsg": "node scripts/verify-commit-msg.js"
   },
   "lint-staged": {

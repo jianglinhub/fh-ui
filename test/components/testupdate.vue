@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  mounted() {
+  mounted(){
     console.log('query:', this.$route.query); // eslint-disable-line
   },
 };

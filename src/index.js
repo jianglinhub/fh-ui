@@ -1,5 +1,3 @@
-/* @flow */
-
 import './styles/index.less'
 import BaseSearch from './components/base-search'
 import BtnLeftGroup from './components/btn-left-group'
