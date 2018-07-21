@@ -7,12 +7,12 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
+    "build": "node build/build.js",
     "lint": "eslint --fix src/**/*.{js,vue} scripts test/**/*.{js,vue}",
     "flow": "flow check",
-    "build": "node build/build.js",
     "test": "npm run lint",
     "commit": "git-cz",
-    "precommit": "lint-staged",
+    "precommit": "npm run test && lint-staged",
     "commitmsg": "node scripts/verify-commit-msg.js"
   },
   "lint-staged": {
