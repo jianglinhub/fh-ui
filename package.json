@@ -1,6 +1,6 @@
 {
   "name": "fh-ui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Vue + ElementUi后台管理系统通用组件",
   "author": "jianglin",
   "main": "lib/FHUi.min.js",
@@ -85,5 +85,14 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

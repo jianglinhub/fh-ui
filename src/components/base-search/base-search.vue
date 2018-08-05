@@ -16,12 +16,10 @@
       <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
       <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
       <el-button type="primary" size="small" style="width:100px;" @click="reset">重置</el-button>
-      <!--
       <div class="condition-action">
         <span @click="isShowSearchModal = true">保存查询条件</span>
         <span>重置</span>
       </div>
-      -->
     </div>
     <transition name="fade">
       <div class="more-condition" v-show="isShowMoreCondition">
@@ -175,10 +173,10 @@ export default {
   data() {
     return {
       moreConditions: [{
-        field: '',
-        condition: 'contain',
-        value: '',
-        and: 'AND',
+        fieldCode: '',
+        fileType: 'contain',
+        defValue: '',
+        logic: 'AND',
         randomKey: 'djdhn&d163',
       }],
       value: '',
@@ -187,10 +185,10 @@ export default {
       activeName2: 'first',
       tableConditionData: [],
       tmpCondition: {
-        field: '',
-        condition: 'contain',
-        value: '',
-        and: 'AND',
+        fieldCode: '',
+        fileType: 'contain',
+        defValue: '',
+        logic: 'AND',
       },
     };
   },
@@ -221,6 +219,7 @@ export default {
       for (let i = 0; i < conditions.length; i += 1) {
         conditions[i].seqNo = i + 1;
         delete conditions[i].randomKey;
+        conditions[i].groupCode = 0;
       }
       return conditions;
     },
@@ -242,10 +241,10 @@ export default {
     },
     reset() {
       this.moreConditions = [{
-        field: '',
-        condition: 'contain',
-        value: '',
-        and: 'AND',
+        fieldCode: '',
+        fileType: 'contain',
+        defValue: '',
+        logic: 'AND',
       }];
     },
   },

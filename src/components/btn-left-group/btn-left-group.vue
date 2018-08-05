@@ -6,10 +6,13 @@
       <save v-if="btns.includes('save')" :options="options.saveOptions"></save>
       <delete
         v-if="btns.includes('del')"
-        :options="options.delOptions"
         @deleteAction="doHandle"
       ></delete>
-      <audit v-if="btns.includes('audit')" :options="options.auditOptions"></audit>
+      <audit
+        v-if="btns.includes('audit')"
+        :options="options.auditOptions"
+        @auditAction="auditAction"
+      ></audit>
       <check v-if="btns.includes('check')" :options="options.checkOptions"></check>
       <start-use
         v-if="btns.includes('startUse')"
@@ -25,15 +28,62 @@
         :options="options.confirmSelectOptions">
       </confirm-select>
     </el-button-group>
+    <!-- 确认操作弹窗 -->
     <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible"
-      :before-close="handleClose"
+      :title="`${actionName}提示`"
+      :visible.sync="noticeDialogVisible"
+      :before-close="handleNoticeClose"
       width="30%">
-      <span>确定要{{actionName}}【id={{id}}】的项吗？</span>
+      <span>是否确认{{actionName}}所选数据？</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handleClose">取 消</el-button>
-        <el-button type="primary" @click="handleConfirm">确 定</el-button>
+        <el-button @click="handleNoticeClose">取 消</el-button>
+        <el-button type="primary" @click="handleNoticeConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 审核弹窗 -->
+    <el-dialog
+      title="审核意见"
+      :visible.sync="auditDialogVisible"
+      :before-close="handleAuditClose"
+      width="460px">
+      <div>
+        <div>
+          <span
+            style="display:inline-block;margin-right:10px;width:80px;text-align:right;">
+          审核意见</span>
+          <el-radio v-model="auditRadio" label="1">通过</el-radio>
+          <el-radio v-model="auditRadio" label="2">驳回</el-radio>
+        </div>
+        <div style="margin-top:12px;overflow:hidden;">
+          <span
+            style="display:inline-block;float:left;
+              margin-right:10px;width:80px;height:40px;text-align:right;">
+            附件</span>
+          <el-upload
+            style="width:300px;display:inline-block;overflow:hidden;"
+            :action="uploadUrl"
+            :on-remove="handleRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed">
+          <el-button size="small" type="primary">点击上传</el-button>
+        </el-upload>
+        </div>
+        <div style="margin-top:12px;">
+          <span
+            style="display:inline-block;margin-right:10px;width:80px;height:74px;text-align:right;"
+          >备注</span>
+          <el-input
+            type="textarea"
+            :rows="3"
+            style="width: 300px;"
+            placeholder="请输入内容">
+          </el-input>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handleAuditClose">取 消</el-button>
+        <el-button type="primary" @click="handleAuditConfirm">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -55,9 +105,11 @@ import ConfirmSelect from '../btns/confirm-select';
 export default {
   data() {
     return {
-      id: '-1',
       actionName: '删除',
-      dialogVisible: false,
+      noticeDialogVisible: false,
+      auditDialogVisible: false,
+      uploadUrl: '',
+      auditRadio: '1',
     };
   },
   props: {
@@ -72,7 +124,6 @@ export default {
         return {
           addOptions: {},
           updateOptions: {},
-          delOptions: {},
           auditOptions: {},
           checkOptions: {},
           submitOptions: {},
@@ -87,26 +138,43 @@ export default {
     },
   },
   methods: {
+    auditAction(data) {
+      this.auditDialogVisible = true;
+      this.uploadUrl = data.action;
+    },
     doHandle(data) {
-      this.dialogVisible = true;
-      this.id = data.id;
+      this.noticeDialogVisible = true;
       this.actionName = data.actionName;
     },
-    handleClose() {
-      this.dialogVisible = false;
+    handleNoticeClose() {
+      this.noticeDialogVisible = false;
       if (this.actionName === '删除') {
         this.$emit('handleDelClose');
       } else if (this.actionName === '启用') {
         this.$emit('handleStartUseClose');
       }
     },
-    handleConfirm() {
-      this.dialogVisible = false;
+    handleNoticeConfirm() {
+      this.noticeDialogVisible = false;
       if (this.actionName === '删除') {
         this.$emit('handleDelConfirm');
       } else if (this.actionName === '启用') {
         this.$emit('handleStartUseConfirm');
       }
+    },
+    handleAuditClose() {
+      this.auditDialogVisible = false;
+      this.$emit('handleAuditClose');
+    },
+    handleAuditConfirm() {
+      this.auditDialogVisible = false;
+      this.$emit('handleAuditConfirm');
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList); // eslint-disable-line
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
     },
   },
   components: {

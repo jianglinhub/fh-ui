@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-select v-model="options1.field" placeholder="列表字段" size="small" style="width:160px">
+      <el-select v-model="options1.fieldCode" placeholder="列表字段" size="small" style="width:160px">
         <el-option
           v-for="item in fields"
           :key="item.value"
@@ -8,7 +8,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-select v-model="options1.condition" placeholder="包含" size="small" style="width:100px">
+      <el-select v-model="options1.fileType" placeholder="包含" size="small" style="width:100px">
         <el-option
           v-for="item in conditions"
           :key="item.value"
@@ -16,9 +16,9 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-input placeholder="请输入内容" v-model="options1.value" size="small" style="width:160px">
+      <el-input placeholder="请输入内容" v-model="options1.defValue" size="small" style="width:160px">
       </el-input>
-      <el-select v-model="options1.and" placeholder="并且" size="small" style="width:80px">
+      <el-select v-model="options1.logic" placeholder="并且" size="small" style="width:80px">
         <el-option
           v-for="item in ands"
           :key="item.value"
@@ -91,10 +91,10 @@ export default {
       type: Object,
       default() {
         return {
-          field: '',
-          condition: '',
-          value: '',
-          and: '',
+          fieldCode: '',
+          fileType: '',
+          defValue: '',
+          logic: '',
         };
       },
     },

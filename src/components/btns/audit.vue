@@ -1,5 +1,5 @@
 <template>
-  <el-button type="primary" icon="el-icon-view" @click="toPage">审核</el-button>
+  <el-button type="primary" icon="el-icon-view" @click="handleClick">审核</el-button>
 </template>
 
 <script>
@@ -8,17 +8,17 @@ export default {
   props: {
     options: {
       type: Object,
-      default() {},
+      default() {
+        return {
+          action: '',
+        };
+      },
       required: true,
     },
   },
   methods: {
-    toPage() {
-      this.$router.push({
-        name: this.options.router,
-        params: this.options.params,
-        query: this.options.query,
-      });
+    handleClick() {
+      this.$emit('auditAction', this.options);
     },
   },
 };
