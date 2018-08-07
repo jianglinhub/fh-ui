@@ -1,12 +1,18 @@
 <template>
   <div id="btn-left-group">
     <el-button-group>
-      <refresh v-if="btns.includes('refresh')"></refresh>
-      <prev v-if="btns.includes('prev')"></prev>
-      <next v-if="btns.includes('next')"></next>
-      <options v-if="btns.includes('options')"></options>
-      <print v-if="btns.includes('print')"></print>
-      <close v-if="btns.includes('close')"></close>
+      <refresh
+        v-if="btns.includes('refresh')"
+        @handleRefresh="handleClick('handleRefresh')">
+      </refresh>
+      <prev v-if="btns.includes('prev')" @handlePrev="handleClick('handlePrev')"></prev>
+      <next v-if="btns.includes('next')" @handleNext="handleClick('handleNext')"></next>
+      <options
+        v-if="btns.includes('options')"
+        @handleOptions="handleClick('handleOptions')">
+      </options>
+      <print v-if="btns.includes('print')" @handlePrint="handleClick('handlePrint')"></print>
+      <close v-if="btns.includes('close')" @handleClose="handleClick('handleClose')"></close>
     </el-button-group>
   </div>
 </template>
@@ -20,13 +26,15 @@ import Print from '../btns/print';
 import Close from '../btns/close';
 
 export default {
-  data() {
-    return {};
-  },
   props: {
     btns: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    handleClick(obj) {
+      this.$emit(obj);
     },
   },
   components: {

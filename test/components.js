@@ -15,13 +15,13 @@ import {
   // Radio,
   // RadioGroup,
   // RadioButton,
-  Checkbox,
+  // Checkbox,
   // CheckboxButton,
   // CheckboxGroup,
   // Switch,
   Select,
   Option,
-  OptionGroup,
+  // OptionGroup,
   Button,
   ButtonGroup,
   Table,
@@ -65,8 +65,8 @@ import {
   // Footer,
   // Loading,
   // MessageBox,
-  Message,
-  Notification,
+  // Message,
+  // Notification,
 } from 'element-ui';
 
 // Vue.use(Pagination);
@@ -84,13 +84,13 @@ Vue.use(InputNumber);
 // Vue.use(Radio);
 // Vue.use(RadioGroup);
 // Vue.use(RadioButton);
-Vue.use(Checkbox);
+// Vue.use(Checkbox);
 // Vue.use(CheckboxButton);
 // Vue.use(CheckboxGroup);
 // Vue.use(Switch);
 Vue.use(Select);
 Vue.use(Option);
-Vue.use(OptionGroup);
+// Vue.use(OptionGroup);
 Vue.use(Button);
 Vue.use(ButtonGroup);
 Vue.use(Table);
@@ -139,5 +139,5 @@ Vue.use(TabPane);
 // Vue.prototype.$alert = MessageBox.alert;
 // Vue.prototype.$confirm = MessageBox.confirm;
 // Vue.prototype.$prompt = MessageBox.prompt;
-Vue.prototype.$notify = Notification;
-Vue.prototype.$message = Message;
+// Vue.prototype.$notify = Notification;
+// Vue.prototype.$message = Message;

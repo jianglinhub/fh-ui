@@ -16,10 +16,12 @@
       <i class="el-icon-d-arrow-left add-btn" @click="showMoreCondition"></i>
       <el-button type="primary" size="small" style="width:100px;" @click="search">查询</el-button>
       <el-button type="primary" size="small" style="width:100px;" @click="reset">重置</el-button>
+      <!--
       <div class="condition-action">
         <span @click="isShowSearchModal = true">保存查询条件</span>
         <span>重置</span>
       </div>
+      -->
     </div>
     <transition name="fade">
       <div class="more-condition" v-show="isShowMoreCondition">
@@ -48,6 +50,7 @@
       </div>
     </transition>
 
+    <!--
     <el-dialog
       title="筛选方案"
       :visible.sync="isShowSearchModal"
@@ -163,6 +166,7 @@
         </div>
       </div>
     </el-dialog>
+    -->
   </div>
 </template>
 
