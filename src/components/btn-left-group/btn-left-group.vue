@@ -11,6 +11,7 @@
         v-if="btns.includes('startUse')"
         @handleStartUse="handleClick('handleStartUse')">
       </start-use>
+      <fobd v-if="btns.includes('fobd')" @handleFobd="handleClick('handleFobd')"></fobd>
       <submit v-if="btns.includes('submit')" @handleSubmit="handleClick('handleSubmit')"></submit>
       <import v-if="btns.includes('imp')" @handleImport="handleClick('handleImport')"></import>
       <export v-if="btns.includes('exp')" @handleExport="handleClick('handleExport')"></export>
@@ -35,6 +36,7 @@ import StartUse from '../btns/start-use';
 import Export from '../btns/export';
 import Import from '../btns/import';
 import ConfirmSelect from '../btns/confirm-select';
+import Fobd from '../btns/fobd';
 
 export default {
   props: {
@@ -61,6 +63,7 @@ export default {
     Save,
     StartUse,
     Submit,
+    Fobd,
   },
 };
 </script>
