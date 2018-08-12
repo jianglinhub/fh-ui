@@ -249,6 +249,7 @@ export default {
         fileType: 'contain',
         defValue: '',
         logic: 'AND',
+        randomKey: (Math.random() * 10000).toFixed(4),
       }];
     },
   },

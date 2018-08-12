@@ -1,6 +1,6 @@
 {
   "name": "fh-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Vue + ElementUi后台管理系统通用组件",
   "author": "jianglin",
   "main": "lib/FHUi.min.js",
